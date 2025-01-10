@@ -14,16 +14,13 @@ export default function Projects() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [projectsPerPage, setProjectsPerPage] = useState(4);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const updateProjectsPerPage = () => {
       if (window.innerWidth <= 768) {
         setProjectsPerPage(2);
-        setIsMobile(true);
       } else {
         setProjectsPerPage(4);
-        setIsMobile(false);
       }
     };
 
@@ -77,8 +74,8 @@ export default function Projects() {
             }}
             transition={{ duration: 0.8 }}
           >
-            Work that i've either developed and released myself, or played an
-            integral role in building
+            Work that i&apos;ve either developed and released myself, or played
+            an integral role in building
           </motion.h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {paginateProjects().map((project) => (

@@ -1,15 +1,30 @@
 import { useEffect, useState } from "react";
 
-export function useCachedState<T>(key: string, initialValue: T) {
-  const [value, setValue] = useState<T>(() => {
-    const jsonValue = localStorage.getItem(key);
-    if (jsonValue != null) return JSON.parse(jsonValue);
-    return initialValue;
-  });
+export function useCachedState<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T) => void] {
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
+    try {
+      const item = window.localStorage.getItem(key);
+      if (item) {
+        setStoredValue(JSON.parse(item));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [key]);
 
-  return [value, setValue] as const;
+  const setValue = (value: T) => {
+    try {
+      setStoredValue(value);
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return [storedValue, setValue];
 }

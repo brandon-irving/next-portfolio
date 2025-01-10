@@ -1,35 +1,38 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronUp, ChevronDown } from 'lucide-react'
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function BackToTop() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isAtTop, setIsAtTop] = useState(true)
+  const [isVisible, setIsVisible] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
 
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
-        setIsVisible(true)
-        setIsAtTop(false)
+        setIsVisible(true);
+        setIsAtTop(false);
       } else {
-        setIsVisible(false)
-        setIsAtTop(true)
+        setIsVisible(false);
+        setIsAtTop(true);
       }
-    }
+    };
 
-    window.addEventListener('scroll', toggleVisibility)
+    window.addEventListener("scroll", toggleVisibility);
 
-    return () => window.removeEventListener('scroll', toggleVisibility)
-  }, [])
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
 
   const scrollToTop = () => {
-    isAtTop
-      ? window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-      : window.scrollTo({ top: 0, behavior: 'smooth' })
-    setIsAtTop(!isAtTop)
-  }
+    if (isAtTop) {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    setIsAtTop(!isAtTop);
+  };
 
   return (
     <AnimatePresence>
@@ -69,6 +72,5 @@ export default function BackToTop() {
         </motion.button>
       )}
     </AnimatePresence>
-  )
+  );
 }
-

@@ -73,7 +73,7 @@ export default function Header() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                Brandon's Portfolio
+                Brandon&apos;s Portfolio
               </motion.h1>
             ) : (
               <motion.nav
@@ -108,7 +108,7 @@ export default function Header() {
               className="hidden md:inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300"
             >
               <Linkedin className="w-4 h-4 mr-2" />
-              Let's connect
+              Let&apos;s connect
             </Link>
             <button
               className="md:hidden text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
